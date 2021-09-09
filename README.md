@@ -6,6 +6,10 @@ This repository is sub-project of the MV-OpenPose and PoseRN which estimates hum
 
 **Codes of MV-OpenPose and PoseRN will be opened soon**
 
+![gif1](gifs/gif1.gif)
+
+![gif2](gifs/gif2.gif)
+
 
 
 ## Description
