@@ -10,7 +10,7 @@ This repository is sub-project of the MV-OpenPose and PoseRN which estimates hum
 
 ![gif2](gifs/gif2.gif)
 
-
+[note] red: MV-OpenPose, blue: Optical Motion Capture System 
 
 ## Description
 
