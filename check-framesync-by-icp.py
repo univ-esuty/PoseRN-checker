@@ -127,7 +127,7 @@ Z = np.concatenate(tZ).flatten()
 op_points = np.stack([X, Y, Z]).T.copy()
 
 ## icp = ICP(dst, src)
-icp = ICP(mc_points, op_points)
+icp = ICP(mc_points, op_points, configs=FRAME_CONF)
 icp.icp_calculate_s(100)
 icp_cost = icp.calc_icpcost()
 

@@ -19,7 +19,9 @@ mocap_conf = {
 openpose_conf = {
     'DATASET_DIR_ROOT': 'input_data/mv-openpose/3dpose',
     'JOINT_IDX' : 8,
-    'FRAME_NUM' : 750
+    'FRAME_NUM' : 750,
+    'ADJ_SCALE' : 0.9,
+    'ADJ_CENTER_Z': 0.012, 
 }
 
 export_conf = {
@@ -34,8 +36,8 @@ openpose_scale, openpose_center = GetScale_OpenPose(openpose_conf)
 mocap_scale, mocap_center = GetScale_MoCap(mocap_conf)
 
 ## adjust
-openpose_scale *= 0.9
-openpose_center[2] += 0.012
+openpose_scale *= mocap_conf['ADJ_SCALE']
+openpose_center[2] += mocap_conf['ADJ_CENTER_Z']
 
 def scalize(scale, x, y, z):
     return x / scale, y / scale, z / scale

@@ -6,40 +6,12 @@ import mpl_toolkits.mplot3d.art3d as art3d
 from math import sin, cos
 
 import numpy as np
-
-_BonesV2 = [
-    #NECK
-    [1,0],[1,8],[1,2],[1,5],
-    #HEAD
-    [0,15],[15,16],[0,17],[17,18],
-    #CROTCH
-    [8,9],[8,12],
-    #LEFT-ARM
-    [2,3],[3,4],
-    #RIGHT-ARM
-    [5,6],[6,7],
-    #LEFT-LEG
-    [9,10],[10,11],[11,22],[11,23],[11,24],
-    #RIGHT-LEG
-    [12,13],[13,14],[14,19],[14,20],[14,21]
-]
-
-def setLines_at_openpose(X, Y, Z):
-    num = len(_BonesV2)
-    lineX = np.zeros(25*8*2).reshape(25*8, 2)
-    lineY = np.zeros(25*8*2).reshape(25*8, 2)
-    lineZ = np.zeros(25*8*2).reshape(25*8, 2)
-
-    for j in range(8):
-        for i, bone in enumerate(_BonesV2): 
-            lineX[i+25*j][0] = X[bone[0]+25*j]; lineX[i+25*j][1] = X[bone[1]+25*j]
-            lineY[i+25*j][0] = Y[bone[0]+25*j]; lineY[i+25*j][1] = Y[bone[1]+25*j] 
-            lineZ[i+25*j][0] = Z[bone[0]+25*j]; lineZ[i+25*j][1] = Z[bone[1]+25*j] 
-
-    return lineX, lineY, lineZ
+from draw import setLines_at_openpose, setLines_at_optmocap
 
 class ICP(object):
-    def __init__(self, points_dst, points_src):
+    def __init__(self, points_dst, points_src, configs=None):
+        self.configs = configs
+
         self.points_dst = points_dst
         self.points_src = points_src
         self.icp_points = np.array([None])
@@ -130,10 +102,16 @@ class ICP(object):
             # ax.plot(self.points_src[:,0], self.points_src[:,1], self.points_src[:,2], "o", color="#0000ff", ms=1, mew=0.5)
             ax.plot(self.icp_points[:,0], self.icp_points[:,1], self.icp_points[:,2], "o", color="#000000", ms=1, mew=0.5)
 
-            X, Y, Z = setLines_at_openpose(self.icp_points[:,0], self.icp_points[:,1], self.icp_points[:,2])
-            for i, (x, y, z) in enumerate(zip(X, Y, Z)):
-                line = art3d.Line3D(x, y, z, color=pyplot.cm.jet(255//len(_BonesV2)*(i%24)))
-                ax.add_line(line)
+            if self.configs:
+                X, Y, Z = setLines_at_openpose(self.icp_points[:,0], self.icp_points[:,1], self.icp_points[:,2], self.configs['FRAME_NUM'])
+                for i, (x, y, z) in enumerate(zip(X, Y, Z)):
+                    line = art3d.Line3D(x, y, z, color='red')
+                    ax.add_line(line)
+
+                X, Y, Z = setLines_at_optmocap(self.points_dst[:,0], self.points_dst[:,1], self.points_dst[:,2], self.configs['FRAME_NUM']):
+                for i, (x, y, z) in enumerate(zip(X, Y, Z)):
+                    line = art3d.Line3D(x, y, z, color='blue')
+                    ax.add_line(line)
             
             if not isSave: 
                 pyplot.show()
