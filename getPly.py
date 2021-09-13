@@ -2,7 +2,7 @@ import numpy as np
 import datetime
 
 from compScale import GetScale_OpenPose, GetScale_MoCap
-from getPoints import MoCap, OpenPose3d
+from getPoints import Mocap, Openpose3d
 
 ## generally, optical motion capture samples data very frequently
 ## adjust the parameter and fit to sampleing rate of MV-OpenPose 

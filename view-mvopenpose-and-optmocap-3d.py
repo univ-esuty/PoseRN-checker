@@ -37,8 +37,8 @@ openpose_scale, openpose_center = GetScale_OpenPose(openpose_conf)
 mocap_scale, mocap_center = GetScale_MoCap(mocap_conf)
 
 ## adjust
-openpose_scale *= mocap_conf['ADJ_SCALE']
-openpose_center[2] += mocap_conf['ADJ_CENTER_Z']
+openpose_scale *= openpose_conf['ADJ_SCALE']
+openpose_center[2] += openpose_conf['ADJ_CENTER_Z']
 
 def scalize(scale, x, y, z):
     return x / scale, y / scale, z / scale
