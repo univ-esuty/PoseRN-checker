@@ -1,6 +1,7 @@
 ## Evaluate accuracy of  Multi-View-OpenPose comparing to Optical Motion Capture System with Simple ICP algorithm.
 
- [[Paper](https://arxiv.org/abs/2107.03000)] 
+ [[Paper-1](https://arxiv.org/abs/2107.03000)]  
+ [[paper-2](https://drive.google.com/file/d/1Y_nSAjMFgGFswgldEvLiZy0-irx4AQjT/view?usp=share_link)]  
 
 This repository is sub-project of the MV-OpenPose and PoseRN which estimates human fullbody pose in 3d. MV-OpenPose is the extension of [openpose](https://github.com/CMU-Perceptual-Computing-Lab/openpose) and estimates fullbody pose in 3d by using calibrated multiple RGB cameras. In the examples, we used 6 HD-RGB cameras.   If you don't know the details of the MV-OpenPose and PoseRN fullbody motion capture system, please check our paper in the link at the top. 
 
